@@ -8,6 +8,8 @@
 :CoronaStats
 ```
 
+![](https://raw.githubusercontent.com/mattn/vim-corona-stats/master/corona-stats.png)
+
 ## Requirements
 
 * curl
