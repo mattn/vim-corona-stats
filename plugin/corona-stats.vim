@@ -12,7 +12,7 @@ function! s:corona_stats() abort
 
   let l:contents = system('curl -s https://corona-stats.online?format=json')
   let l:resp = json_decode(l:contents)
-  for l:row in l:resp.data
+  for l:row in l:resp.data + [l:resp.worldStats]
     call add(l:lines, map(deepcopy(l:keys), 'l:row[v:val[0]]'))
   endfor
   let l:h = range(len(l:lines[0]))
@@ -36,7 +36,11 @@ function! s:corona_stats() abort
     let l:lines[l:n] = '|' . join(l:lines[l:n], '|') . '|'
   endfor
   call insert(l:lines, '|' . join(l:h, '|') . '|', 1)
-  new
+  call insert(l:lines, '|' . join(l:h, '|') . '|', len(l:lines)-1)
+  silent new
+  file __CORONA_STATS__
+  setlocal buftype=nofile nolist nonumber bufhidden=wipe noswapfile buflisted filetype=
   silent call append(0, l:lines)
+  normal! gg
 endfunction
 command! CoronaStats call s:corona_stats()
