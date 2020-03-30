@@ -10,7 +10,7 @@ function! s:corona_stats() abort
   \]
   call add(l:lines, map(deepcopy(l:keys), 'v:val[1]'))
 
-  let l:contents = system('curl -s https://corona-stats.online?format=json')
+  let l:contents = system('curl -s "https://corona-stats.online?format=json"')
   let l:resp = json_decode(l:contents)
   for l:row in l:resp.data + [l:resp.worldStats]
     call add(l:lines, map(deepcopy(l:keys), 'l:row[v:val[0]]'))
