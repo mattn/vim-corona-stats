@@ -20,16 +20,16 @@ function! s:corona_stats() abort
     let l:m = 0
     let l:w = range(len(l:lines))
     for l:r in range(len(l:w))
-      let l:w[l:r] = strdisplaywidth(l:lines[l:r][l:c] . '　')
+      let l:w[l:r] = strdisplaywidth(l:lines[l:r][l:c] . '  ')
       let l:m = max([l:m, l:w[l:r]])
     endfor
     for l:r in range(len(l:w))
-      let l:mark = '　'
+      let l:mark = '  '
       if l:keys[l:c][2] ==# 1
         if l:lines[l:r][l:c] > 0
-          let l:mark = '▲'
+          let l:mark = ' ^'
         elseif l:lines[l:r][l:c] < -0
-          let l:mark = '▼'
+          let l:mark = ' v'
         endif
       endif
       if l:c > 0
